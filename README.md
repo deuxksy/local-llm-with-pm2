@@ -1,4 +1,4 @@
-# Local LLM Server
+# Local LLM Manager
 
 PM2로 관리하는 Local LLM 서버 설정입니다.
 
