@@ -4,13 +4,13 @@
  * 실행: pm2 start ecosystem.config.js
  * 로그: ../logs/Qwen3-VL-4B.log
  */
-require('dotenv').config({ path: __dirname + '/.env' });
+const LOCAL_BIN_PATH = '/Users/crong/.local/bin';
 
 module.exports = {
   apps: [
     {
       name: 'Qwen3-VL-4B',
-      script: `${process.env.LOCAL_BIN_PATH}/mlx_lm.server`,
+      script: `${LOCAL_BIN_PATH}/mlx_lm.server`,
       args: [
         '--model mlx-community/Qwen3-VL-4B-Instruct-4bit',
         '--host 0.0.0.0',
