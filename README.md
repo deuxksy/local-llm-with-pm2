@@ -13,12 +13,12 @@ flowchart TB
 
     subgraph "eve (macOS)"
         C[mlx_lm.server]
-        D[qwen3-vl-4b]
+        D[Qwen3-VL-4B]
     end
 
     subgraph "girl (SteamDeck)"
         E[KoboldCPP]
-        F[qwen3.5-4b]
+        F[Qwen3.5-4B]
         G[models/]
     end
 
@@ -49,8 +49,8 @@ flowchart TB
 
 | 서버 | 이름 | 모델 | 포트 |
 |------|------|------|------|
-| 🍎 eve | qwen3-vl-4b | mlx-community/Qwen3-VL-4B-Instruct-4bit | 58081 |
-| 🎮 girl | qwen3.5-4b | Qwen3.5-4B-Q5_K_M.gguf | 58081 |
+| 🍎 eve | Qwen3-VL-4B | mlx-community/Qwen3-VL-4B-Instruct-4bit | 58081 |
+| 🎮 girl | Qwen3.5-4B | Qwen3.5-4B-Q5_K_M.gguf | 58081 |
 
 ## 🚀 4. 빠른 시작
 

@@ -4,13 +4,13 @@
  * 실행: pm2 start ecosystem.config.js
  * 로그: ../logs/qwen3.5-4b.log
  */
-const LOCAL_BIN_PATH = '/home/deck/.local/bin';
+require('dotenv').config({ path: __dirname + '/.env' });
 
 module.exports = {
   apps: [
     {
-      name: 'qwen3.5-4b',
-      script: `${LOCAL_BIN_PATH}/koboldcpp`,
+      name: 'qwen3.5-4B',
+      script: `${process.env.LOCAL_BIN_PATH}/koboldcpp`,
       args: [
         '--model ./models/Qwen3.5-4B-Q5_K_M.gguf',
         '--host 0.0.0.0',
@@ -24,8 +24,8 @@ module.exports = {
       interpreter: 'none',
       log_date_format: 'YYYY-MM-DD HH:mm:ss',
       merge_logs: true,
-      error_file: '../logs/qwen3.5-4b.log',
-      out_file: '../logs/qwen3.5-4b.log',
+      error_file: '../logs/qwen3.5-4B.log',
+      out_file: '../logs/qwen3.5-4B.log',
       env_file: '.env',
       max_memory_restart: '8G',
       autorestart: true,
