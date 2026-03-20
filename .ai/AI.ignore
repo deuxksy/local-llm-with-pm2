@@ -1,0 +1,12 @@
+# Logs
+logs/
+
+# Models (large files)
+servers/*/models/
+
+# Environment
+.env
+servers/*/.env
+
+# Cache
+.cache
