@@ -54,26 +54,15 @@ flowchart LR
 ## 4. 사용법
 
 ```bash
-# 서버 시작
-pm2 start ecosystem.config.js
-
-# 상태 확인
-pm2 status
-
-# 로그 확인
-pm2 logs qwen3-vl-4b
-
-# 재시작
-pm2 restart qwen3-vl-4b
-
-# 중지
-pm2 stop qwen3-vl-4b
-
-# PM2 상태 저장 (재부팅 시 복원용)
-pm2 save
+pm2 start ecosystem.config.js   # 시작
+pm2 status                     # 상태 확인
+pm2 logs qwen3-vl-4b           # 로그 확인
+pm2 restart qwen3-vl-4b        # 재시작
+pm2 stop qwen3-vl-4b           # 중지
+pm2 save                       # 상태 저장 (재부팅 시 복원)
 ```
 
-### 4.1 로그
+## 5. 로그 관리
 
 - **위치**: `./logs/`
 - **Rotate**: 10MB 초과 시 자동 rotate, 최대 3개 파일 유지 (압축)
@@ -94,7 +83,7 @@ pm2 save
 }
 ```
 
-### 4.2 모델 추가
+## 6. 모델 추가
 
 `ecosystem.config.js`의 `apps` 배열에 새 항목을 추가합니다:
 
