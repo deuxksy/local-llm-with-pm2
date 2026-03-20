@@ -8,6 +8,37 @@ PM2로 관리하는 Local LLM 서버 설정입니다.
 |------|------|------|
 | qwen3-vl-4b | mlx-community/Qwen3-VL-4B-Instruct-4bit | 58081 |
 
+## 아키텍처
+
+```mermaid
+flowchart LR
+    subgraph PM2
+        A[ecosystem.config.js]
+        B[pm2-logrotate]
+    end
+
+    subgraph Services
+        C[mlx_lm.server]
+        D[KoboldCPP<br/>향후 추가]
+    end
+
+    A --> C
+    A --> D
+    B --> C
+    B --> D
+
+    C --> E[(logs/)]
+    D --> E
+
+    subgraph External
+        F[HuggingFace]
+        G[Local Models]
+    end
+
+    C --> F
+    C --> G
+```
+
 ## 사용법
 
 ```bash
@@ -33,20 +64,7 @@ pm2 save
 ## 로그
 
 - **위치**: `./logs/qwen3-vl-4b.log`
-
-### pm2-logrotate 설정
-
-```json
-{
-  "max_size": "10M",
-  "retain": 3,
-  "compress": true,
-  "dateFormat": "YYYY-MM-DD_HH-mm-ss",
-  "workerInterval": 30,
-  "rotateInterval": "0 0 * * *",
-  "rotateModule": true
-}
-```
+- **Rotate**: 10MB 초과 시 자동 rotate, 최대 3개 파일 유지 (압축)
 
 ### pm2-logrotate 설정
 
@@ -84,7 +102,7 @@ pm2 save
 ```javascript
 {
   name: 'new-model',
-  script: '/Users/crong/.local/bin/mlx_lm.server',
+  script: `${LOCAL_BIN_PATH}/mlx_lm.server`,
   args: [
     '--model <model-path>',
     '--host 0.0.0.0',
