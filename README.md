@@ -2,13 +2,7 @@
 
 PM2로 관리하는 Local LLM 서버 설정입니다.
 
-## 서비스
-
-| 이름 | 모델 | 포트 |
-|------|------|------|
-| qwen3-vl-4b | mlx-community/Qwen3-VL-4B-Instruct-4bit | 58081 |
-
-## 아키텍처
+## 1. 아키텍처
 
 ```mermaid
 flowchart LR
@@ -39,7 +33,25 @@ flowchart LR
     D --> G
 ```
 
-## 사용법
+## 2. 파일 구조
+
+```
+.
+├── ecosystem.config.js   # PM2 설정
+├── .env                  # 환경변수
+├── .gitignore
+├── README.md
+└── logs/                 # 로그 디렉토리
+    └── *.log
+```
+
+## 3. 서비스
+
+| 이름 | 모델 | 포트 |
+|------|------|------|
+| qwen3-vl-4b | mlx-community/Qwen3-VL-4B-Instruct-4bit | 58081 |
+
+## 4. 사용법
 
 ```bash
 # 서버 시작
@@ -61,12 +73,12 @@ pm2 stop qwen3-vl-4b
 pm2 save
 ```
 
-## 로그
+### 4.1 로그
 
-- **위치**: `./logs/qwen3-vl-4b.log`
+- **위치**: `./logs/`
 - **Rotate**: 10MB 초과 시 자동 rotate, 최대 3개 파일 유지 (압축)
 
-### pm2-logrotate 설정
+**pm2-logrotate 설정** (`~/.pm2/module_conf.json`):
 
 ```json
 {
@@ -82,20 +94,7 @@ pm2 save
 }
 ```
 
-> 설정 파일 위치: `~/.pm2/module_conf.json`
-
-## 파일 구조
-
-```
-.
-├── ecosystem.config.js   # PM2 설정
-├── .env                  # 환경변수
-├── logs/                 # 로그 디렉토리
-│   └── qwen3-vl-4b.log
-└── README.md
-```
-
-## 모델 추가
+### 4.2 모델 추가
 
 `ecosystem.config.js`의 `apps` 배열에 새 항목을 추가합니다:
 
