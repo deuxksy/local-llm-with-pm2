@@ -39,6 +39,7 @@ flowchart TB
 │   └── .env
 ├── girl/                       # 🎮 SteamDeck 서버
 │   ├── ecosystem.config.js
+│   ├── pm2.service             # systemd user service
 │   ├── .env
 │   └── models/                 # 모델 파일 (gitignore)
 ├── logs/                       # 📋 공통 로그
@@ -81,9 +82,33 @@ pm2 save
 
 ### 4-3. 부팅 시 자동 시작
 
+**🍎 eve (macOS):**
 ```bash
 pm2 startup            # startup 스크립트 생성 (안내 따라 실행)
 pm2 save               # 현재 상태 저장
+```
+
+**🎮 girl (SteamDeck) - systemd user service:**
+
+> **왜 필요한가?** SteamDeck에서 `pm2 start`로 실행하면 SSH 세션 종료 시 SIGHUP signal이 전파되어 PM2 daemon이 함께 종료됩니다. systemd user service로 등록하면 세션과 무관하게 PM2가 유지됩니다.
+
+```bash
+# 1. 심볼릭 링크 생성
+ln -sf ~/git/local-llm-manager/girl/pm2.service ~/.config/systemd/user/pm2.service
+
+# 2. PM2 서비스 시작 및 상태 저장
+cd ~/git/local-llm-manager/girl
+pm2 start ecosystem.config.js
+pm2 save
+
+# 3. systemd 서비스 활성화
+systemctl --user daemon-reload
+systemctl --user enable pm2.service
+systemctl --user start pm2.service
+
+# 4. 상태 확인
+systemctl --user status pm2.service
+pm2 list
 ```
 
 ## ⌨️ 5. 자주 쓰는 명령어
