@@ -1,7 +1,7 @@
-# PM2 로그
+# Logs
 logs/
 
-# 환경변수 (민감 정보 포함 가능)
+# Environment
 .env
 .env.local
 .env.*.local

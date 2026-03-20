@@ -1,6 +1,6 @@
-# MLX LM Server
+# Local LLM Server
 
-PM2로 관리하는 MLX LM 서버 설정입니다.
+PM2로 관리하는 Local LLM 서버 설정입니다.
 
 ## 서비스
 
@@ -33,7 +33,38 @@ pm2 save
 ## 로그
 
 - **위치**: `./logs/qwen3-vl-4b.log`
-- **Rotate**: 10MB 초과 시 자동 rotate, 최대 3개 파일 유지
+
+### pm2-logrotate 설정
+
+```json
+{
+  "max_size": "10M",
+  "retain": 3,
+  "compress": true,
+  "dateFormat": "YYYY-MM-DD_HH-mm-ss",
+  "workerInterval": 30,
+  "rotateInterval": "0 0 * * *",
+  "rotateModule": true
+}
+```
+
+### pm2-logrotate 설정
+
+```json
+{
+  "pm2-logrotate": {
+    "max_size": "10M",
+    "retain": "3",
+    "compress": true,
+    "dateFormat": "YYYY-MM-DD_HH-mm-ss",
+    "workerInterval": "30",
+    "rotateInterval": "0 0 * * *",
+    "rotateModule": true
+  }
+}
+```
+
+> 설정 파일 위치: `~/.pm2/module_conf.json`
 
 ## 파일 구조
 

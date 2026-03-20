@@ -1,3 +1,7 @@
+/**
+ * PM2 Logrotate 설정: ./pm2-logrotate.json
+ * 적용: pm2 install pm2-logrotate 후 설정값 적용
+ */
 module.exports = {
   apps: [
     {
